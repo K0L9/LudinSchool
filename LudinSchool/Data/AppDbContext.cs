@@ -1,5 +1,4 @@
-﻿using LudinSchool.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace LudinSchool.Data
 {
@@ -9,7 +8,5 @@ namespace LudinSchool.Data
         {
 
         }
-
-        public virtual DbSet<TestEntity> TestEntities { get; set; }
     }
 }
