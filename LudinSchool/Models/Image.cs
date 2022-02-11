@@ -9,7 +9,7 @@ namespace LudinSchool.Models
         public string FileName { get; set; }
 
         //Foreign keys
-        public int NewsId { get; set; }
+        public int? NewsId { get; set; }
 
         //Navigation props
         public News News { get; set; }
