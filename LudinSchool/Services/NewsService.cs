@@ -114,7 +114,6 @@ namespace LudinSchool.Services
             }
             catch (System.Exception)
             {
-
                 throw;
             }
         }

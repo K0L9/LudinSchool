@@ -4,8 +4,10 @@ using LudinSchool.Models.DTO.Images;
 using LudinSchool.Models.DTO.News;
 using System;
 using System.Buffers.Text;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LudinSchool.Services
 {
@@ -50,6 +52,15 @@ namespace LudinSchool.Services
 
             image.NewsId = news.Id;
             _db.SaveChanges();
+        }
+        public IEnumerable<string> GetImagesOfNews(int newsId)
+        {
+            var news = _db.News.SingleOrDefault(x => x.Id == newsId);
+            if (news == null)
+                throw new Exception("News not found");
+
+            var result = news.Images.Select(x => x.FileName).ToList();
+            return result;
         }
     }
 }

@@ -1,9 +1,47 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import Loader from "./components/common/loader";
+
+const DefaultLayout = lazy(
+  () => import("./components/containers/defaultLayout")
+);
+
+const AdminLayout = lazy(() => import("./components/containers/adminLayout"));
+const HomePage = lazy(() => import("./components/home"));
 
 function App() {
-  return <h1>App</h1>;
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Suspense fallback={<Loader />}>
+              <DefaultLayout />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<Loader />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+        </Route>
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<Loader />}>
+              <AdminLayout />
+            </Suspense>
+          }
+        ></Route>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

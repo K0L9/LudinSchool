@@ -13,7 +13,7 @@ import { ApplicationState, reducers } from "./";
 
 const rootReducer = combineReducers({
   ...reducers,
-  router: connectRouter(history),
+  router: connectRouter(window.history),
   //   home: homeReducer,
   //   auth: loginReducer,
   //   itemShop: itemShopReducer,

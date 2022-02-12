@@ -6,16 +6,17 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import configureStore from "./store/configureStore";
 import { createBrowserHistory } from "history";
+import "./styles/theme.scss";
 
 const history = createBrowserHistory();
 const store = configureStore(history);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

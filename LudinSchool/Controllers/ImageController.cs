@@ -41,7 +41,18 @@ namespace LudinSchool.Controllers
             catch (System.Exception ex)
             {
                 return BadRequest(ex.Message);
-                throw;
+            }
+        }
+        [HttpGet("get-images-news")]
+        public IActionResult GetImagesOfCurrentNews(int imageId)
+        {
+            try
+            {
+                return Ok(_imageService.GetImagesOfNews(imageId));
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }
