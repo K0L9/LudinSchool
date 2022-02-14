@@ -7,7 +7,9 @@ const AdminLayout = () => {
   return (
     <>
       <AdminHeader />
-      <Outlet />
+      <div className="adminContainer">
+        <Outlet />
+      </div>
     </>
   );
 };

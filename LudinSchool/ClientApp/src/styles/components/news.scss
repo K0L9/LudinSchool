@@ -1,5 +1,5 @@
 .news {
-  background-color: rgb(235, 235, 235);
+  // background-color: rgb(235, 235, 235);
   max-width: 380px;
   display: inline-block;
 
@@ -83,6 +83,7 @@
 .newsList {
   width: 70%;
   display: inline-flex;
+  justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
   column-gap: 30px;
