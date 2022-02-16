@@ -22,7 +22,7 @@ namespace LudinSchool.Controllers
         {
             try
             {
-                string fileName = _imageService.SaveImage(imageDTO);
+                AddImageResponseDTO fileName = _imageService.SaveImage(imageDTO);
                 return Ok(fileName);
             }
             catch (System.Exception)

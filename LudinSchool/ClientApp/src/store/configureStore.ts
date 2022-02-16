@@ -4,22 +4,12 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import { History } from "history";
 import { ApplicationState, reducers } from "./";
 
-// import { homeReducer } from "../components/app/reducer";
-// import { loginReducer } from "../components/authorization/login/reducer";
-// import { itemShopReducer } from "../components/productAdmin/reducer";
-// import { cartReducer } from "../components/shop/cart/reducer";
-// import { storageReducer } from "src/components/storage/reducer";
-// import { gameReducer } from "src/components/game/app/reducer";
+import { createNewsReducer } from "../components/admin/news/create/reducer";
 
 const rootReducer = combineReducers({
   ...reducers,
   router: connectRouter(window.history),
-  //   home: homeReducer,
-  //   auth: loginReducer,
-  //   itemShop: itemShopReducer,
-  //   cart: cartReducer,
-  //   storage: storageReducer,
-  //   game: gameReducer,
+  createNews: createNewsReducer,
 });
 
 export default function configureStore(

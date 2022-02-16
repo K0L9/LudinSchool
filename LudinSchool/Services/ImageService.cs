@@ -20,7 +20,7 @@ namespace LudinSchool.Services
             _db = db;
         }
 
-        public string SaveImage(AddImageDTO imageDTO)
+        public AddImageResponseDTO SaveImage(AddImageDTO imageDTO)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace LudinSchool.Services
 
                 _db.Images.Add(new Image() { FileName = fileName });
                 _db.SaveChanges();
-                return fileName;
+                return new AddImageResponseDTO() { FileName = fileName};
             }
             catch (Exception)
             {

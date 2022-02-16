@@ -1,4 +1,7 @@
-.newsAdd {
+.imagesContainer {
+  display: flex;
+  flex-direction: column;
+
   img {
     width: 400px;
     margin: 10px auto;
