@@ -20,15 +20,31 @@ const NewsCreate = () => {
     await loadImage(body);
   };
 
-  console.log("images: ", images);
-
+  const handleSetToTiny = (fileName: string) => {
+    // editorRef.current.setContent(
+    //   editorRef.current.getContent() + "/Images/" + fileName
+    // );
+    const filePath = "/Images/" + fileName;
+    console.log(filePath);
+    editorRef.current.execCommand(
+      "mceInsertContent",
+      false,
+      '<img alt="Smiley face" src="' + filePath + '"/>'
+    );
+  };
   return (
     <div className="newsAdd">
       <Row gutter={6}>
         <Col span={5} className="gutter-row">
           <div className="imagesContainer">
             {images.map((element, id) => {
-              return <img key={id} src={`/Images/${element.fileName}`} />;
+              return (
+                <img
+                  key={id}
+                  src={`/Images/${element.fileName}`}
+                  onClick={() => handleSetToTiny(element.fileName)}
+                />
+              );
             })}
             <CropperWindow onSubmitProduct={onImageLoad} />
           </div>

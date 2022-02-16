@@ -13,7 +13,7 @@ export interface ICropperProps {
 const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
   const defaultImgSrc = "/Images/default/selectImage.png";
   const imgRef = useRef<HTMLImageElement>(null);
-  const [cropperObj, setCropperObj] = useState<Cropper>();
+  const [cropperObj, setCropperObj] = useState<Cropper | null>();
   const [imgSrc, setImg] = useState<string>(defaultImgSrc);
   const [base64, setBase64] = useState<string>("");
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -29,6 +29,7 @@ const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
     setLoad(false);
   };
   const modalCancel = () => {
+    setCropperObj(null);
     setShowModal(false);
   };
   const handleImageChange = async (e: any) => {
@@ -37,14 +38,10 @@ const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
       const url = URL.createObjectURL(file);
       await setImg(url);
       setShowModal(true);
-      let cropper = cropperObj;
-      console.log("cropper", cropper);
-      // if (!cropper) {
-      cropper = new Cropper(imgRef.current as HTMLImageElement, {
+      const cropper = new Cropper(imgRef.current as HTMLImageElement, {
         aspectRatio: 16 / 9,
         viewMode: 1,
       });
-      // }
       cropperObj?.replace(url);
       setCropperObj(cropper);
       e.target.value = "";
