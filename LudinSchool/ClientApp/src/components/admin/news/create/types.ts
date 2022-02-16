@@ -4,6 +4,12 @@ export enum CreateNewsActionTypes {
 export interface IAddNewsState {
   images: Array<IImage>;
 }
+export interface INews {
+  content: string;
+  smallContent: string;
+  title: string;
+  newsCategoryId: number;
+}
 
 export interface IImageDTO {
   base64: string;

@@ -8,12 +8,32 @@ import { Editor } from "@tinymce/tinymce-react";
 import { config as tinyConfig } from "./tinyConfig";
 
 import CropperWindow from "../../../common/cropper";
-import { IImageDTO } from "./types";
+import { IImageDTO, INews } from "./types";
+import { validationFields } from "./validation";
+
+import Input from "../../../common/form/input";
+
+import {
+  Formik,
+  FormikHelpers,
+  FormikProps,
+  Form,
+  Field,
+  FieldProps,
+} from "formik";
+import Textarea from "../../../common/form/textarea";
 
 const NewsCreate = () => {
   const editorRef = useRef<any>(null);
   const { loadImage } = useActions();
   const { images } = useTypedSelector((redux) => redux.createNews);
+  const initialValues: INews = {
+    content: "",
+    newsCategoryId: -1,
+    smallContent: "",
+    title: "",
+  };
+  const refFormik = useRef<FormikProps<INews>>(null);
 
   const onImageLoad = async (base64: string) => {
     const body: IImageDTO = { base64 };
@@ -32,6 +52,7 @@ const NewsCreate = () => {
       '<img alt="Smiley face" src="' + filePath + '"/>'
     );
   };
+  const handleSubmit = () => {};
   return (
     <div className="newsAdd">
       <Row gutter={6}>
@@ -56,7 +77,45 @@ const NewsCreate = () => {
             init={tinyConfig}
           />
         </Col>
-        <Col span={7} className="gutter-row"></Col>
+        <Col span={7} className="gutter-row">
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validationSchema={validationFields}
+            innerRef={refFormik}
+          >
+            {(props: FormikProps<INews>) => {
+              const { values, errors, touched, handleChange, handleSubmit } =
+                props;
+              return (
+                <Form onSubmit={handleSubmit}>
+                  <Input
+                    label="Заголовок"
+                    error={errors.title as string}
+                    placeholder="Заголовок"
+                    field="title"
+                    value={values.title}
+                    touched={touched.title as boolean}
+                    onChange={handleChange}
+                    className=""
+                  />
+                  <Textarea
+                    label="Заголовок"
+                    error={errors.smallContent as string}
+                    placeholder="Заголовок"
+                    field="smallContent"
+                    value={values.smallContent}
+                    touched={touched.smallContent as boolean}
+                    onChange={handleChange}
+                    className=""
+                  />
+
+                  <button type="submit">Submt</button>
+                </Form>
+              );
+            }}
+          </Formik>
+        </Col>
       </Row>
     </div>
   );
