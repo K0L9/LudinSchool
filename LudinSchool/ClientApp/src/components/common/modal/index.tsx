@@ -19,6 +19,7 @@ const Modal = ({
 }: IModalProps) => {
   return (
     <AntModal
+      destroyOnClose={true}
       onCancel={onCancel}
       onOk={onOk}
       visible={visible}

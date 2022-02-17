@@ -118,7 +118,7 @@ namespace LudinSchool.Services
             }
         }
 
-        public async void AddNews(AddNewsDTO newsDTO)
+        public async Task<int> AddNews(AddNewsDTO newsDTO)
         {
             try
             {
@@ -134,8 +134,10 @@ namespace LudinSchool.Services
                 News news = mapper.Map<News>(newsDTO);
                 news.Date = System.DateTime.Now;
                 news.Slug = slug;
-                await _db.News.AddAsync(news);
+                var result = await _db.News.AddAsync(news);
                 _db.SaveChanges();
+
+                return result.Entity.Id;
             }
             catch (System.Exception)
             {

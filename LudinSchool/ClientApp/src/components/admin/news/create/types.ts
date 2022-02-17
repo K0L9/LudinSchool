@@ -19,6 +19,10 @@ export interface IImageDTO {
 export interface IImage {
   fileName: string;
 }
+export interface IImagesNewsDTO {
+  newsId: number;
+  fileNames: Array<string>;
+}
 
 export interface ISendImageAction {
   type: CreateNewsActionTypes.LOAD_IMAGE;

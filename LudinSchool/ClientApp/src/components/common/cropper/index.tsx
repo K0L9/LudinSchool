@@ -42,7 +42,7 @@ const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
         aspectRatio: 16 / 9,
         viewMode: 1,
       });
-      cropperObj?.replace(url);
+      cropper?.replace(url);
       setCropperObj(cropper);
       e.target.value = "";
     }
@@ -64,16 +64,18 @@ const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
           <label htmlFor="inputFile">
             <img src={defaultImgSrc} className="addImageBtn" />
           </label>
-          <Modal
-            onOk={getBase64}
-            visible={showModal}
-            onCancel={modalCancel}
-            width={1000}
-          >
-            <div>
-              <img ref={imgRef as LegacyRef<HTMLImageElement>} src={imgSrc} />
-            </div>
-          </Modal>
+          {showModal && (
+            <Modal
+              onOk={getBase64}
+              visible={true}
+              onCancel={modalCancel}
+              width={1000}
+            >
+              <div>
+                <img ref={imgRef as LegacyRef<HTMLImageElement>} src={imgSrc} />
+              </div>
+            </Modal>
+          )}
         </>
       )}
     </>

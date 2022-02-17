@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import Loader from "./components/common/loader";
 import AdminBasedRoute from "./routing/adminRoute";
@@ -32,6 +33,7 @@ function App() {
               </Suspense>
             }
           />
+          <Route path="/loader" element={<Loader />} />
         </Route>
         <Route
           path="/admin"
@@ -60,6 +62,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
+      <ToastContainer pauseOnFocusLoss={false} />
     </Router>
   );
 }

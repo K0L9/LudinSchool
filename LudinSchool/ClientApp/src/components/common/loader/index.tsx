@@ -1,7 +1,11 @@
 import * as React from "react";
 
 const Loader = () => {
-  return <h1>Loading</h1>;
+  return (
+    <div className="loader">
+      <img src="/Images/default/loaderWObg.gif" alt="" />
+    </div>
+  );
 };
 
 export default Loader;

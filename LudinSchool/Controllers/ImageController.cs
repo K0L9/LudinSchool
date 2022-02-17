@@ -25,9 +25,22 @@ namespace LudinSchool.Controllers
                 AddImageResponseDTO fileName = _imageService.SaveImage(imageDTO);
                 return Ok(fileName);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return BadRequest("Errors");
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpPost("delete-image")]
+        public IActionResult DeleteImage([FromBody] DeleteImageDTO imageDTO)
+        {
+            try
+            {
+                _imageService.DeleteImage(imageDTO);
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
         [HttpPost("connect-image-news")]
@@ -42,6 +55,20 @@ namespace LudinSchool.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpPost("connect-images-news")]
+        public IActionResult ConnectImages([FromBody] ConnectImagesToNewsDTO dto)
+        {
+            try
+            {
+                _imageService.ConnectImagesToNews(dto);
+                return Ok();
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         [HttpGet("get-images-news")]
         public IActionResult GetImagesOfCurrentNews(int imageId)

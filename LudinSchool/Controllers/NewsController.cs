@@ -59,12 +59,12 @@ namespace LudinSchool.Controllers
         }
 
         [HttpPost("add-news")]
-        public IActionResult AddNews(AddNewsDTO newsDTO)
+        public async Task<IActionResult> AddNews(AddNewsDTO newsDTO)
         {
             try
             {
-                _newsService.AddNews(newsDTO);
-                return Ok();
+                int result = await _newsService.AddNews(newsDTO);
+                return Ok(result);
             }
             catch (System.Exception)
             {

@@ -40,6 +40,31 @@ namespace LudinSchool.Services
                 throw;
             }
         }
+        public void DeleteImage(DeleteImageDTO imageDTO)
+        {
+            try
+            {
+                var image = _db.Images.SingleOrDefault(x => x.FileName == imageDTO.FileName);
+                if (image == null)
+                    throw new Exception("Фото в бд не знайдена");
+
+                _db.Images.Remove(image);
+
+                string filePath = ENV.ImagesPath + imageDTO.FileName;
+                
+                if (File.Exists(filePath))
+                    File.Delete(filePath);
+                else
+                    throw new Exception("Файл для видалення не знайдений");
+
+                _db.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public void ConnectImageToNews(ConnectImageToNewsDTO dto)
         {
             var news = _db.News.SingleOrDefault(x => x.Id == dto.NewsId);
@@ -51,6 +76,23 @@ namespace LudinSchool.Services
                 throw new Exception("Image are not founded");
 
             image.NewsId = news.Id;
+            _db.SaveChanges();
+        }
+        public void ConnectImagesToNews(ConnectImagesToNewsDTO dto)
+        {
+            var news = _db.News.SingleOrDefault(x => x.Id == dto.NewsId);
+            if (news == null)
+                throw new Exception("News are not founded");
+
+            foreach (var el in dto.FileNames)
+            {
+                var image = _db.Images.FirstOrDefault(x => x.FileName == el);
+                if (image == null)
+                    throw new Exception("Image are not founded");
+
+                image.NewsId = news.Id;
+            }
+
             _db.SaveChanges();
         }
         public IEnumerable<string> GetImagesOfNews(int newsId)

@@ -4,13 +4,13 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import { History } from "history";
 import { ApplicationState, reducers } from "./";
 
-import { createNewsReducer } from "../components/admin/news/create/reducer";
+// import { createNewsReducer } from "../components/admin/news/create/reducer";
 import { newsCategoriesReducer } from "../components/admin/news/newsCategories/reducer";
 
 const rootReducer = combineReducers({
   ...reducers,
   router: connectRouter(window.history),
-  createNews: createNewsReducer,
+  // createNews: createNewsReducer,
   newsCategories: newsCategoriesReducer,
 });
 
