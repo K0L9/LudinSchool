@@ -1,8 +1,9 @@
 import { Input as AntInput, Form } from "antd";
 
 var classNames = require("classnames");
+
 export interface IInputProps {
-  label: string;
+  // label: string;
   error: string;
   placeholder: string;
   field: string;
@@ -13,7 +14,6 @@ export interface IInputProps {
 }
 
 const Input = ({
-  label,
   error,
   placeholder,
   field,
@@ -29,7 +29,6 @@ const Input = ({
   }
   return (
     <Form.Item
-      label={label}
       hasFeedback
       validateStatus={classNames(
         { error: touched && error },
@@ -44,6 +43,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         className={className}
+        size="large"
       />
     </Form.Item>
   );

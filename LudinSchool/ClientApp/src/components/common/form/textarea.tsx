@@ -1,9 +1,10 @@
 import { Form, Input } from "antd";
+const { TextArea } = Input;
 
 var classNames = require("classnames");
 
 export interface ITextareaProps {
-  label: string;
+  // label: string;
   error: string;
   placeholder: string;
   field: string;
@@ -14,7 +15,7 @@ export interface ITextareaProps {
 }
 
 const Textarea = ({
-  label,
+  // label,
   error,
   placeholder,
   field,
@@ -25,7 +26,7 @@ const Textarea = ({
 }: ITextareaProps) => {
   return (
     <Form.Item
-      label={label}
+      // label={label}
       hasFeedback
       validateStatus={classNames(
         { error: touched && error },
@@ -33,7 +34,7 @@ const Textarea = ({
       )}
       help={error}
     >
-      <Input.TextArea
+      <TextArea
         placeholder={placeholder}
         onChange={onChange}
         name={field}
@@ -42,6 +43,7 @@ const Textarea = ({
         className={className}
         showCount
         maxLength={250}
+        size="large"
       />
     </Form.Item>
   );

@@ -8,13 +8,18 @@ import configureStore from "./store/configureStore";
 import { createBrowserHistory } from "history";
 import "./styles/theme.scss";
 
+import { ConfigProvider } from "antd";
+import ukUA from "antd/lib/locale/uk_UA";
+
 const history = createBrowserHistory();
 const store = configureStore(history);
 
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <App />
+    <ConfigProvider locale={ukUA}>
+      <App />
+    </ConfigProvider>
   </Provider>,
   // </React.StrictMode>,
   document.getElementById("root")

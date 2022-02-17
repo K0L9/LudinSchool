@@ -11,7 +11,7 @@ export interface ICropperProps {
 }
 
 const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
-  const defaultImgSrc = "/Images/default/selectImage.png";
+  const defaultImgSrc = "/Images/default/selectImagePlus.png";
   const imgRef = useRef<HTMLImageElement>(null);
   const [cropperObj, setCropperObj] = useState<Cropper | null>();
   const [imgSrc, setImg] = useState<string>(defaultImgSrc);
@@ -62,7 +62,7 @@ const CropperWindow = ({ onSubmitProduct }: ICropperProps) => {
             onChange={handleImageChange}
           />
           <label htmlFor="inputFile">
-            <img src={defaultImgSrc} />
+            <img src={defaultImgSrc} className="addImageBtn" />
           </label>
           <Modal
             onOk={getBase64}

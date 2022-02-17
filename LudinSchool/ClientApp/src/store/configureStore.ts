@@ -5,11 +5,13 @@ import { History } from "history";
 import { ApplicationState, reducers } from "./";
 
 import { createNewsReducer } from "../components/admin/news/create/reducer";
+import { newsCategoriesReducer } from "../components/admin/news/newsCategories/reducer";
 
 const rootReducer = combineReducers({
   ...reducers,
   router: connectRouter(window.history),
   createNews: createNewsReducer,
+  newsCategories: newsCategoriesReducer,
 });
 
 export default function configureStore(

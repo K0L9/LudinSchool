@@ -5,6 +5,8 @@ export const validationFields = () => {
     title: Yup.string().required("Введіть заголовок для новини"),
     smallContent: Yup.string().required("Введіть короткий опис"),
     content: Yup.string().required("Введіть внутрішній контент"),
-    newsCategoryId: Yup.number().required("Оберіть категорію"),
+    newsCategoryId: Yup.number()
+      .required("Оберіть категорію")
+      .min(0, "Оберіть категорію"),
   });
 };

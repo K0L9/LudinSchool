@@ -37,6 +37,7 @@ namespace LudinSchool
 
             services.AddTransient<NewsService>();
             services.AddTransient<ImageService>();
+            services.AddTransient<NewsCategoryService>();
 
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
