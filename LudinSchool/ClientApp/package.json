@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^3.13.0",
+    "@types/dateformat": "^5.0.0",
     "@types/jest": "^24.9.1",
     "@types/jquery": "^3.5.13",
     "@types/node": "^12.20.43",
@@ -20,6 +21,7 @@
     "classnames": "^2.3.1",
     "connected-react-router": "^6.9.2",
     "cropperjs": "^1.5.12",
+    "dateformat": "^5.0.2",
     "formik": "^2.2.9",
     "qs": "^6.10.3",
     "react": "^17.0.2",
@@ -32,6 +34,8 @@
     "react-toastify": "^8.2.0",
     "sass": "^1.49.7",
     "typescript": "^4.1.6",
+    "webpack-dev-server": "^4.7.4",
+    "ws": "^8.5.0",
     "yup": "^0.32.11"
   },
   "scripts": {

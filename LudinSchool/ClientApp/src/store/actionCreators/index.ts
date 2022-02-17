@@ -1,4 +1,4 @@
-import * as HomeActions from "../../components/home/actions";
+import * as HomeActions from "../../components/admin/news/list/actions";
 // import * as AddNewsActions from "../../components/admin/news/create/actions";
 import * as NewsCategoryActions from "../../components/admin/news/newsCategories/actions";
 

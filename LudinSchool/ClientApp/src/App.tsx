@@ -12,6 +12,7 @@ const AdminLayout = lazy(() => import("./components/containers/adminLayout"));
 
 const HomePage = lazy(() => import("./components/home"));
 const NewsCreate = lazy(() => import("./components/admin/news/create"));
+const AdminNewsList = lazy(() => import("./components/admin/news/list"));
 
 function App() {
   return (
@@ -51,6 +52,14 @@ function App() {
               </Suspense>
             }
           >
+            <Route
+              path="/admin/news/list"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <AdminNewsList />
+                </Suspense>
+              }
+            />
             <Route
               path="/admin/news/create"
               element={

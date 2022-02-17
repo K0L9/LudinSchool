@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 
@@ -15,7 +16,7 @@ import AddImagesContainer from "../../../common/addImagesContainer";
 
 import Input from "../../../common/form/input";
 
-import { Button } from "antd";
+import { Button, Form as AntForm } from "antd";
 
 import { Link } from "react-router-dom";
 import { CreateNewsService } from "./service";
@@ -33,7 +34,6 @@ import {
 } from "formik";
 import Textarea from "../../../common/form/textarea";
 import Select from "../../../common/form/select";
-import { AxiosError } from "axios";
 
 const NewsCreate = () => {
   const service: CreateNewsService = new CreateNewsService();
@@ -49,6 +49,7 @@ const NewsCreate = () => {
     title: "",
   };
   const refFormik = useRef<FormikProps<INews>>(null);
+  const navigator = useNavigate();
 
   const [newsCategoryLoading, setCategLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -87,14 +88,21 @@ const NewsCreate = () => {
             newsId: id,
             fileNames: images.map((x) => x.fileName),
           };
-          service.connectImagesNews(imagesNews).catch((error) => {
-            const errorMessage =
-              (error as string) !== null && (error as string) !== undefined
-                ? (error as string)
-                : "Виникли помилки. Перевірте дані, спробуйте ще раз та зверніться до адміна";
-            toast.error(errorMessage as string);
-          });
-          toast.success("Товар успішно доданий");
+          service
+            .connectImagesNews(imagesNews)
+            .catch((error) => {
+              const errorMessage =
+                (error as string) !== null && (error as string) !== undefined
+                  ? (error as string)
+                  : "Виникли помилки. Перевірте дані, спробуйте ще раз та зверніться до адміна";
+              toast.error(errorMessage as string);
+              setLoading(false);
+            })
+            .then(() => {
+              setLoading(false);
+              navigator("/admin/news/list");
+              toast.success("Товар успішно доданий");
+            });
         })
         .catch((error) => {
           const errorMessage =
@@ -102,6 +110,7 @@ const NewsCreate = () => {
               ? (error as string)
               : "Виникли помилки. Перевірте дані, спробуйте ще раз та зверніться до адміна";
           toast.error(errorMessage as string);
+          setLoading(false);
         });
       setLoading(false);
     } catch (error) {
@@ -112,6 +121,7 @@ const NewsCreate = () => {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="newsAdd">
         <Formik
           initialValues={initialValues}
@@ -133,17 +143,19 @@ const NewsCreate = () => {
                     />
                   </Col>
                   <Col span={12} className="gutter-row">
-                    <Editor
-                      apiKey="rnv1zli3c4ebl1nb1ffig1imvcmahopklllvbv9br4wythl8"
-                      onInit={(evt, editor) => (editorRef.current = editor)}
-                      init={tinyConfig}
-                      id="content"
-                      value={values.content}
-                      textareaName="content"
-                      onEditorChange={(e) =>
-                        refFormik.current?.setFieldValue("content", e)
-                      }
-                    />
+                    <AntForm.Item>
+                      <Editor
+                        apiKey="rnv1zli3c4ebl1nb1ffig1imvcmahopklllvbv9br4wythl8"
+                        onInit={(evt, editor) => (editorRef.current = editor)}
+                        init={tinyConfig}
+                        id="content"
+                        value={values.content}
+                        textareaName="content"
+                        onEditorChange={(e) =>
+                          refFormik.current?.setFieldValue("content", e)
+                        }
+                      />
+                    </AntForm.Item>
                   </Col>
                   <Col span={7} className="gutter-row">
                     <Input

@@ -1,6 +1,6 @@
 import React from "react";
 import { HomeAction, IPaginatedBody, IGetShortNewsResponse } from "./types";
-import http from "../../http_common";
+import http from "../../../../http_common";
 
 import * as qs from "qs";
 
