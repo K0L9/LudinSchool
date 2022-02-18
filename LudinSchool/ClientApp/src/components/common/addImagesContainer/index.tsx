@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IImage, IImageDTO } from "../../admin/news/create/types";
+import { IImage, IImageDTO } from "../../admin/news/types";
 import CropperWindow from "../cropper";
 
 //icons
@@ -8,7 +8,7 @@ import { AiOutlineArrowDown } from "react-icons/ai";
 import { AiOutlineArrowUp } from "react-icons/ai";
 import { BsFillTrashFill } from "react-icons/bs";
 
-import { CreateNewsService } from "../../admin/news/create/service";
+import { AdminNewsService } from "../../admin/news/service";
 import { toast } from "react-toastify";
 
 export interface IImagesContainerProps {
@@ -23,7 +23,7 @@ const AddImagesContainer = ({
   loadImagesToParent,
 }: IImagesContainerProps) => {
   const [images, setImages] = useState<Array<IImage>>(defaultImages);
-  const service: CreateNewsService = new CreateNewsService();
+  const service: AdminNewsService = new AdminNewsService();
 
   const handleImageUp = (id: number) => {
     let tmpImages = images.slice();

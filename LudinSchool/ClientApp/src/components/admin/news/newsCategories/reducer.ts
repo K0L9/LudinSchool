@@ -6,6 +6,7 @@ import {
 
 const initialState: INewsCategoriesState = {
   newsCategories: [],
+  isNewsCategoriesUpdate: false,
 };
 
 export const newsCategoriesReducer = (
@@ -17,6 +18,12 @@ export const newsCategoriesReducer = (
       return {
         ...state,
         newsCategories: action.payload,
+      };
+    }
+    case NewsCategoriesActionTypes.SET_NEWS_CATEGORIES_UPDATE: {
+      return {
+        ...state,
+        isNewsCategoriesUpdate: action.payload,
       };
     }
     default: {

@@ -1,7 +1,6 @@
-import * as HomeActions from "../../components/admin/news/list/actions";
-// import * as AddNewsActions from "../../components/admin/news/create/actions";
+import * as AdminNewsActions from "../../components/admin/news/actions";
 import * as NewsCategoryActions from "../../components/admin/news/newsCategories/actions";
 
-const actions = { ...HomeActions, ...NewsCategoryActions };
+const actions = { ...AdminNewsActions, ...NewsCategoryActions };
 
 export default actions;

@@ -9,7 +9,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { config as tinyConfig } from "./tinyConfig";
 
 import CropperWindow from "../../../common/cropper";
-import { IImage, IImageDTO, INews, IImagesNewsDTO } from "./types";
+import { IImage, IImageDTO, INewsDTO, IImagesNewsDTO } from "../types";
 import { validationFields } from "./validation";
 
 import AddImagesContainer from "../../../common/addImagesContainer";
@@ -19,7 +19,7 @@ import Input from "../../../common/form/input";
 import { Button, Form as AntForm } from "antd";
 
 import { Link } from "react-router-dom";
-import { CreateNewsService } from "./service";
+import { AdminNewsService } from "../service";
 
 import { toast } from "react-toastify";
 import Loader from "../../../common/loader";
@@ -36,26 +36,34 @@ import Textarea from "../../../common/form/textarea";
 import Select from "../../../common/form/select";
 
 const NewsCreate = () => {
-  const service: CreateNewsService = new CreateNewsService();
+  const service: AdminNewsService = new AdminNewsService();
   const editorRef = useRef<any>(null);
   const { fetchNewsCategories } = useActions();
-  const { newsCategories } = useTypedSelector((redux) => redux.newsCategories);
+  const { newsCategories, isNewsCategoriesUpdate } = useTypedSelector(
+    (redux) => redux.newsCategories
+  );
   // const [images, setImages] = useState<Array<IImage>>([]);
   let images: Array<IImage> = [];
-  const initialValues: INews = {
+  const initialValues: INewsDTO = {
     content: "",
     newsCategoryId: -1,
     smallContent: "",
     title: "",
   };
-  const refFormik = useRef<FormikProps<INews>>(null);
+  const refFormik = useRef<FormikProps<INewsDTO>>(null);
   const navigator = useNavigate();
 
   const [newsCategoryLoading, setCategLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    getNewsCategories();
+    if (
+      !newsCategories ||
+      newsCategories.length === 0 ||
+      isNewsCategoriesUpdate
+    ) {
+      getNewsCategories();
+    }
   }, []);
 
   const getNewsCategories = async () => {
@@ -82,7 +90,7 @@ const NewsCreate = () => {
     const values = refFormik.current?.values;
     try {
       service
-        .loadNews(values as INews)
+        .loadNews(values as INewsDTO)
         .then((id) => {
           let imagesNews: IImagesNewsDTO = {
             newsId: id,
@@ -129,7 +137,7 @@ const NewsCreate = () => {
           validationSchema={validationFields}
           innerRef={refFormik}
         >
-          {(props: FormikProps<INews>) => {
+          {(props: FormikProps<INewsDTO>) => {
             const { values, errors, touched, handleChange, handleSubmit } =
               props;
             return (
