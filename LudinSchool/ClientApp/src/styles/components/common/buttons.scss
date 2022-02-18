@@ -1,0 +1,34 @@
+.buttonDanger {
+  border: $danger-color 1px solid;
+  color: $danger-color;
+
+  &:hover {
+    background-color: $danger-color;
+    border-color: white;
+  }
+}
+.buttonSuccess {
+  border: $success-color 1px solid;
+  color: $success-color;
+  &:hover {
+    background-color: $success-color;
+    border-color: white;
+  }
+}
+.buttonWarning {
+  border: $warning-color 1px solid;
+  color: $warning-color;
+  &:hover {
+    background-color: $warning-color;
+    border-color: white;
+  }
+}
+
+.buttonInfo {
+  border: $info-color 1px solid;
+  color: $info-color;
+  &:hover {
+    background-color: $info-color;
+    border-color: white;
+  }
+}

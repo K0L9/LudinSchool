@@ -10,14 +10,15 @@ import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
-    <Sider width={200} className="site-layout-background">
+    <Sider width={250}>
       <Menu
         mode="inline"
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         style={{ height: "100%", borderRight: 0 }}
+        className="adminSidebar"
       >
-        <SubMenu key="sub1" icon={<BsNewspaper />} title="News">
+        <SubMenu key="sub1" icon={<BsNewspaper />} title="Новини">
           <Menu.Item key="1" icon={<AiOutlineOrderedList />}>
             <Link to="/admin/news/list">Список</Link>
           </Menu.Item>

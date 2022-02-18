@@ -5,7 +5,7 @@ import { AdminNewsService } from "../service";
 import { IPaginatedBody, IGetShortNewsResponse, IShortNewsVM } from "../types";
 
 import Loader from "../../../common/loader";
-import { Popconfirm, Table, TableProps } from "antd";
+import { Popconfirm, Table, Button } from "antd";
 import dateFormat, { masks } from "dateformat";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ const AdminNewsList = () => {
   const { fetchNews, fetchNewsCategories, setNewsUpdate } = useActions();
   const service = new AdminNewsService();
   const { news, isUpdate } = useTypedSelector((x) => x.adminNews);
+  const { newsCategories } = useTypedSelector((x) => x.newsCategories);
   const [loading, setLoading] = useState<boolean>(false);
 
   const columns = [
@@ -36,6 +37,12 @@ const AdminNewsList = () => {
     {
       title: "Категорія",
       dataIndex: "categoryName",
+      filters: newsCategories.map((x) => {
+        return { text: x.name, value: x.name };
+      }),
+
+      onFilter: (value: string, record: IShortNewsVM) =>
+        record.categoryName == value,
     },
     {
       title: "Дата добавлення",
@@ -47,9 +54,24 @@ const AdminNewsList = () => {
       title: "Дії",
       dataIndex: "actions",
       render: (a: any, record: IShortNewsVM) => (
-        <Popconfirm title="Sure?" onConfirm={() => console.log(record)}>
-          Delete
-        </Popconfirm>
+        <div className="buttonGroup">
+          <Popconfirm
+            title={`Ви впевнені що хочете видалити ${record.title}?`}
+            onConfirm={() => console.log(record)}
+          >
+            <Button htmlType="button" type="default" className="buttonDanger">
+              Видалити
+            </Button>
+          </Popconfirm>
+          <Popconfirm
+            title={`Ви впевнені що хочете видалити ${record.title}?`}
+            onConfirm={() => console.log(record)}
+          >
+            <Button htmlType="button" type="default" className="buttonInfo">
+              Редагувати
+            </Button>
+          </Popconfirm>
+        </div>
       ),
     },
   ];

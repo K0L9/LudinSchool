@@ -198,10 +198,18 @@ const NewsCreate = () => {
                       className="antSelection"
                     />
                     <div className="buttonGroup">
-                      <Button htmlType="submit" type="default">
+                      <Button
+                        htmlType="submit"
+                        type="default"
+                        className="buttonSuccess"
+                      >
                         Підтвердити
                       </Button>
-                      <Button htmlType="button" type="default">
+                      <Button
+                        htmlType="button"
+                        className="buttonDanger"
+                        type="default"
+                      >
                         <Link to={"/"}>Скасувати</Link>
                       </Button>
                     </div>

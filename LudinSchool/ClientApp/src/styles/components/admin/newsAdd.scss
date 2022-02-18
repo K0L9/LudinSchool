@@ -65,28 +65,12 @@
 }
 .buttonGroup {
   button {
-    color: black;
     font-size: 32px;
     padding: 20 10px;
     display: block;
     height: auto;
     margin: 10px auto;
-    border-color: 10px;
-
-    &:first-child {
-      border: $success-color 1px solid;
-      color: $success-color;
-    }
-    &:last-child {
-      border: $danger-color 1px solid;
-      color: $danger-color;
-    }
-    &:first-child:hover {
-      background-color: $success-color;
-    }
-    &:last-child:hover {
-      background-color: $danger-color;
-    }
+    border-color: inherit;
   }
 
   button:hover {
