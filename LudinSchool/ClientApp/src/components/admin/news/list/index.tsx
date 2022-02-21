@@ -57,7 +57,7 @@ const AdminNewsList = () => {
         <div className="buttonGroup">
           <Popconfirm
             title={`Ви впевнені що хочете видалити ${record.title}?`}
-            onConfirm={() => console.log(record)}
+            onConfirm={() => handleNewsDelete(record)}
           >
             <Button htmlType="button" type="default" className="buttonDanger">
               Видалити
@@ -65,7 +65,7 @@ const AdminNewsList = () => {
           </Popconfirm>
           <Popconfirm
             title={`Ви впевнені що хочете видалити ${record.title}?`}
-            onConfirm={() => console.log(record)}
+            onConfirm={() => handleNewsDelete(record)}
           >
             <Button htmlType="button" type="default" className="buttonInfo">
               Редагувати
@@ -94,6 +94,15 @@ const AdminNewsList = () => {
         toast.error(ex.message);
       }
       toast.error(ex as string);
+    }
+  };
+  const handleNewsDelete = async (news: IShortNewsVM) => {
+    try {
+      await service.deleteNews(news.slug);
+      toast.success(`Новина ${news.title} була успішно видалена`);
+      setNewsUpdate(true);
+    } catch (error) {
+      toast.error(error as string);
     }
   };
   return (

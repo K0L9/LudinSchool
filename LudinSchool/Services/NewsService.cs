@@ -145,17 +145,16 @@ namespace LudinSchool.Services
             }
         }
 
-        public void DeleteNews(int id)
+        public void DeleteNews(string slug)
         {
             try
             {
-                var news = _db.News.SingleOrDefault(x => x.Id == id);
+                var news = _db.News.SingleOrDefault(x => x.Slug == slug);
+                if (news == null)
+                    throw new System.Exception("Not found");
                 var imgsNews = _db.Images.Where(x => x.NewsId == news.Id);
                 foreach (var el in imgsNews)
                     _db.Images.Remove(el);
-
-                if (news == null)
-                    throw new System.Exception("Not found");
 
                 _db.News.Remove(news);
                 _db.SaveChanges();

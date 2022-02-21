@@ -17,6 +17,7 @@ export class AdminNewsService {
   connectImagesNews: (body: IImagesNewsDTO) => Promise<void>;
   fetchNews: (body: IPaginatedBody) => Promise<IGetShortNewsResponse>;
   fetchAllNews: () => Promise<IGetShortNewsResponse>;
+  deleteNews: (slug: string) => void;
 
   constructor() {
     this.loadImage = async (body) => {
@@ -99,6 +100,14 @@ export class AdminNewsService {
         });
 
       return response;
+    };
+    this.deleteNews = async (slug) => {
+      const response = await http
+        .delete(`/api/News/delete-news/${slug}`)
+        .catch((error) => {
+          if (axios.isAxiosError(error)) throw (error as AxiosError).message;
+          throw error;
+        });
     };
   }
 }

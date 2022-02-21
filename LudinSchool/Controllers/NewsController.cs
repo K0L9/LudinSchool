@@ -72,12 +72,12 @@ namespace LudinSchool.Controllers
             }
         }
 
-        [HttpDelete("delete-news/{id}")]
-        public IActionResult DeleteNews(int id)
+        [HttpDelete("delete-news/{slug}")]
+        public IActionResult DeleteNews(string slug)
         {
             try
             {
-                _newsService.DeleteNews(id);
+                _newsService.DeleteNews(slug);
                 return Ok();
             }
             catch (System.Exception ex)
